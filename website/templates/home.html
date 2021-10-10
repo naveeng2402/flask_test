@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+  <h1 align="center" style="padding-top: 0.5em;">
+    {% if user.name|length <= 10 %}
+      {{user.name.upper()+'\'s'}} NOTES
+    {% else %}
+      YOUR NOTES
+    {% endif %}
+    
+  </h1>
+
+  <div class="container">
+    <ul class="list-group" id="notes" style="padding-bottom: 1em;">
+      {% for note in user.notes %}
+          <li class="list-group-item">
+            {{note.data}}
+            <button class="close" type="button" onclick="delete_node({{note.id}})">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </li>
+      {% endfor %}
+    </ul>
+    <form method="POST">
+      <textarea name="note" id="note" class="form-control"></textarea>
+      <div class="text-center" style="padding-top: 0.25em;">
+        <button type="submit" class="btn btn-primary rounded-pill" >Add Note</button>
+        <button id="home-clear" type="reset" class="btn btn-primary rounded-pill" >Clear</button>
+        <style>
+          #home-clear{background-color:#808080;border-color: #808080;}
+          #home-clear:hover{background-color: #666666;}
+        </style>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}
+
+
+
