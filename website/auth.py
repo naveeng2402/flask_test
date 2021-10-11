@@ -41,6 +41,7 @@ def sign_up():
 
     return render_template("sign-up.html", user=current_user)
 
+
 @auth.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
@@ -49,7 +50,10 @@ def login():
         if user:
             if check_password_hash(user.password, request.form.get("pass")):
                 login_user(user, remember=True)
-                flash(f"Logged in as {current_user.name.capitalize()}!", category="success")
+                flash(
+                    f"Logged in as {current_user.name.capitalize()}!",
+                    category="success",
+                )
                 return redirect(url_for("views.home"))
             else:
                 flash("Incorrect Password!", category="error")
@@ -62,6 +66,8 @@ def login():
 @auth.route("/logout")
 @login_required
 def logout():
-    flash(f'{current_user.name.capitalize()} Logged out successfully!', category='success')
+    flash(
+        f"{current_user.name.capitalize()} Logged out successfully!", category="success"
+    )
     logout_user()
     return redirect(url_for("auth.login"))
