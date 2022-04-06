@@ -13,4 +13,4 @@ SQLAlchemy==1.4.25
 tomli==1.2.1
 typing-extensions==3.10.0.2
 Werkzeug==2.0.1
-gunicorn==2.4.1
+gunicorn==19.5.0
